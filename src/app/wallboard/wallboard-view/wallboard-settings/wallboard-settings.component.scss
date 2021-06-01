@@ -1,0 +1,64 @@
+
+.backdrop {
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 120vh;
+    background: rgba(0,0,0,0.75);
+    z-index: 50;  
+    text-align: right;
+    
+  }
+    
+
+  .alert-box {
+    position: fixed;
+    top:15vh;
+    height: 70vh;      
+    overflow-y: auto;
+    width: 50%;
+    text-align: center;
+    padding: 16px;
+    z-index: 100;
+    left: 25vw;
+    background:white;
+    box-shadow: 02px 8px rgba(0,0,0,0.25);      
+   
+  }
+  
+  .alert-box-action {
+    text-align: right;     
+  }
+  
+  .cardclass{
+    text-align: right;
+    overflow:auto;           
+  }
+  
+
+
+  
+  
+    .parent {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    
+    .child {
+      width: 380px;
+      margin: 10px;        
+    }
+
+    .hr {
+      border-color: black;    
+      width: 100%;
+      
+    }
+  
+    
+  
+  
+  
+  

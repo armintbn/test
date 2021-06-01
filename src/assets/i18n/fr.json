@@ -1,0 +1,18 @@
+{
+"خوش آمدید" : "BIENVENUE",
+"انتخاب زبان" : "Choisir la langue",
+"پنل کاربری" : "tableau de bord",
+"حسابها" : "comptes",
+ "بسته ها" : "paquets",
+ "سفارشات":"orders",
+  "حسابداری":"accounting",
+  "ارز":"currencies",
+  "کیف پول":"wallet",
+  "نقل و انتقال":"transactions",
+  "برگشت درخواست":"withdraw request",
+  "تنظیمات":"setting",
+  "عمومی":"general",
+  "کاربر":"user",
+  "فروش بلیت":"ticketing",
+  "گزارشات":"reports"
+}

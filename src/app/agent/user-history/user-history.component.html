@@ -1,0 +1,102 @@
+<div fxLayout="column" >
+
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+   <mat-panel-title >
+   
+    جستجوی تاریخچه فعالیت 
+  </mat-panel-title>
+  </mat-expansion-panel-header>
+ 
+  <div fxLayout="row wrap" fxLayoutGap="20px">
+    <mat-form-field fxFlex>
+      <input matInput [matDatepicker]="picker" readonly placeholder="از تاریخ" [(ngModel)]="fromDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field fxFlex>
+      <input matInput [matDatepicker]="picker2" readonly placeholder="تا تاریخ" [(ngModel)]="toDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div fxFlex>
+      <button mat-raised-button color="primary" (click)="search()">جستجو</button>
+    </div>
+  </div>
+  </mat-expansion-panel>
+  </mat-accordion>
+
+   <mahan-export-report [url]="exportFileString" [fileName]="'گزارش-فعالیت-کاربران'" fxLayoutAlign="end end" fxFlex></mahan-export-report>
+
+  <div class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" class="table">
+
+      <ng-container matColumnDef="row">
+        <th mat-header-cell *matHeaderCellDef> ردیف </th>
+        <td mat-cell *matCellDef="let element;let i=index"> {{i + 1 }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> نام </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="queue_name">
+        <th mat-header-cell *matHeaderCellDef> صف </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.queue_name}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="activity">
+        <th mat-header-cell *matHeaderCellDef> فعالیت </th>
+        <td mat-cell *matCellDef="let element"> {{element.activity}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="started_at">
+        <th mat-header-cell *matHeaderCellDef> زمان شروع </th>
+        <td mat-cell *matCellDef="let element"> {{element.started_at}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="ended_at">
+        <th mat-header-cell *matHeaderCellDef> زمان پایان </th>
+        <td mat-cell *matCellDef="let element"> {{element.ended_at}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="length">
+        <th mat-header-cell *matHeaderCellDef> مدت زمان </th>
+        <td mat-cell *matCellDef="let element"> {{element.length}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-card>
+      <div style="text-align: center;">
+        <label> شماره صفحه :</label>&nbsp;&nbsp;
+        <span class="dot" style="font-weight: bolder;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: larger;">{{current_page}}</span>
+         &nbsp;&nbsp;  &nbsp;&nbsp;
+         <label> تعداد کل صفحات :</label>&nbsp;&nbsp;
+          <span class="dot" style="font-weight: bolder;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: larger;">{{ totalPages}}</span>    
+      </div><br />
+      <div style=" text-align: center;">
+        <button mat-raised-button color="primary" (click)="firstPage()" [ngStyle]="{'width': width}"  [disabled]="current_page == 1">صفحه
+          اول</button>&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)="prevPage()" [ngStyle]="{'width': width}"  [disabled]="current_page == 1">صفحه
+          قبلی</button>&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)="nextPage()" [ngStyle]="{'width': width}" [disabled]="current_page == totalPages">صفحه
+          بعدی</button>&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)="lastPage()" [ngStyle]="{'width': width}" [disabled]="current_page == totalPages">صفحه آخر</button>
+      </div>
+    </mat-card>
+  </div>

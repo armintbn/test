@@ -1,0 +1,123 @@
+    <div fxLayout="column">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+       <mat-panel-title >
+      جستجوی تاریخچه تماسها
+    </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="30px">
+    <mat-form-field fxFlex>
+      <mat-select placeholder=" نوع تماس" fxFlex  color="primary"  [formControl]="form.controls['direction']">            
+       <mat-option [value]="null" style="direction: rtl;">----</mat-option>
+        <mat-option   style ="direction: rtl;" [value]="'internal'" >
+          internal
+        </mat-option>
+        <mat-option   style ="direction: rtl;" [value]="'outgoing'" >
+          outgoing
+        </mat-option>
+        <mat-option   style ="direction: rtl;" [value]="'incoming'" >
+          incoming
+        </mat-option>
+        
+        </mat-select>
+</mat-form-field>
+        
+ 
+        <mat-form-field fxFlex>
+          <input matInput [matDatepicker]="picker" readonly placeholder="از تاریخ" [(ngModel)]="fromDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+          <input matInput [matDatepicker]="picker2" readonly placeholder="تا تاریخ" [(ngModel)]="toDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <div fxFlex>
+          <button mat-raised-button color="primary" (click)="search()">جستجو</button>
+        </div>
+        </div>
+    </mat-expansion-panel>
+    </mat-accordion>
+
+<mahan-export-report [url]="exportFileString" [fileName]="'کزارش-تماسها'" fxLayoutAlign="end end"></mahan-export-report>
+    <div class="mat-elevation-z8" fxFlex>   
+
+      <table mat-table [dataSource]="dataSource" class="table">
+        <ng-container matColumnDef="row">
+          <th mat-header-cell *matHeaderCellDef> ردیف </th>
+          <td mat-cell *matCellDef="let element;let i=index"> {{ i+1 }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="queue">
+          <th mat-header-cell *matHeaderCellDef>صف </th>
+          <td mat-cell *matCellDef="let element"> {{element.queue}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="direction">
+          <th mat-header-cell *matHeaderCellDef> نوع تماس </th>
+          <td mat-cell *matCellDef="let element"> {{element.direction}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="channel">
+          <th mat-header-cell *matHeaderCellDef> مبدا </th>
+          <td mat-cell *matCellDef="let element"> {{element.channel}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dstchannel">
+          <th mat-header-cell *matHeaderCellDef> مقصد </th>
+          <td mat-cell *matCellDef="let element" > {{element.dstchannel}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dst" >
+          <th mat-header-cell *matHeaderCellDef> شماره مقصد </th>
+          <td mat-cell *matCellDef="let element"> {{element.dst}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="calldate">
+          <th mat-header-cell *matHeaderCellDef> تاریخ </th>
+          <td mat-cell *matCellDef="let element"> 
+           {{element.calldate}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bill_time">
+          <th mat-header-cell *matHeaderCellDef> 'مدت تماس </th>
+          <td mat-cell *matCellDef="let element"> 
+           {{element.bill_time}}
+          </td>
+        </ng-container>
+       
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+ <mat-card>
+<div style="text-align: center;"><br/>
+  <label> شماره صفحه :</label>&nbsp;&nbsp;
+  <span class="dot" style="font-weight: bolder;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: larger;"
+  >{{current_page}}</span>
+     &nbsp;&nbsp;  &nbsp;&nbsp;
+      <label> تعداد کل صفحات :</label>&nbsp;&nbsp;
+       <span class="dot" style="font-weight: bolder;
+       font-family: 'Times New Roman', Times, serif;
+       font-size: larger;">{{totalPages}}</span>      
+</div>
+<br/>
+<div style=" text-align: center;">    
+  <button mat-raised-button color="primary" (click)="firstPage()" [ngStyle]="{'width': width}"   [disabled]="current_page == 1">صفحه اول</button>&nbsp;&nbsp;   
+  <button mat-raised-button color="primary"  (click)="prevPage()"  [ngStyle]="{'width': width}"  [disabled]="current_page == 1">صفحه قبلی</button>&nbsp;&nbsp;
+  <button mat-raised-button color="primary"  (click)="nextPage()"  [ngStyle]="{'width': width}"  [disabled]="current_page == totalPages">صفحه بعدی</button>&nbsp;&nbsp;
+  <button mat-raised-button color="primary"  (click)="lastPage()"  [ngStyle]="{'width': width}"  [disabled]="current_page == totalPages">صفحه آخر</button>
+</div>
+</mat-card>
+</div>
+<br/>
+</div>
+
+

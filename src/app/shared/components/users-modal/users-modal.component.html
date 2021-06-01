@@ -1,0 +1,107 @@
+
+<div class="backdrop">
+  <div class="alert-box" [style.left]="left" [style.width]="width" >
+   <form [formGroup]="form" (ngSubmit)="user()">
+<h1 style="color: brown;">{{title}}</h1>
+    <div class="cardclass"  [style.height]="height">
+
+<div  fxLayout="column" >
+  <div fxLayout="row wrap" fxLayoutGap="10px" fxFlex>
+
+    <mat-form-field fxFlex>
+      <input matInput placeholder="نام" [formControl]="form.controls['first_name']" />   
+      <mat-error *ngIf="form.controls['first_name'].hasError('required')">
+        وارد کردن نام اجباری است
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field fxFlex>
+      <input matInput   placeholder="نام خانوادگی" [formControl]="form.controls['last_name']"  /> 
+      <mat-error *ngIf="form.controls['last_name'].hasError('required')">
+        وارد کردن نام خانوادگی اجباری است
+      </mat-error>
+       </mat-form-field>
+
+       <mat-form-field fxFlex>
+        <input matInput  placeholder="ایمیل" style="direction: ltr;" [formControl]="form.controls['email']" /> 
+        <mat-error *ngIf="form.controls['email'].hasError('required') || form.controls['email'].hasError('pattern')">
+          وارد کردن ایمیل (معتبر) اجباری است
+        </mat-error>
+         </mat-form-field>
+  </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxFlex>
+      <mat-form-field fxFlex>
+     <input matInput type="password" placeholder="رمز عبور" [formControl]="form.controls['password']" style="direction: ltr;" /> 
+     <mat-error *ngIf="form.controls['password'].hasError('required')">
+      وارد کردن رمز عبور اجباری است
+    </mat-error>
+       </mat-form-field>
+
+       <mat-form-field fxFlex>
+        <input matInput  placeholder="تکرار رمز عبور" type="password" [formControl]="form.controls['password_confirmation']"
+         style="direction: ltr;" (input)="passwordChecker()" />
+        <mat-error *ngIf="form.controls['password_confirmation'].hasError('required')">
+          وارد کردن تکرار رمز عبور اجباری است
+        </mat-error>
+          </mat-form-field>
+
+
+  <mat-form-field fxFlex>
+    <input matInput  placeholder="موبایل" [maxLength]="11" [formControl]="form.controls['mobile']" style="direction: ltr;" /> 
+    <mat-error *ngIf="form.controls['mobile'].hasError('required')">
+      وارد کردن موبایل اجباری است
+    </mat-error>
+     </mat-form-field>  
+     </div>
+
+     <div fxLayout="row" fxLayoutGap="10px" fxFlex>
+      <mat-form-field fxFlex="50">
+        <mat-select  #selectors  placeholder="صف" multiple [formControl]="form.controls['queues']" 
+        >     
+         <mat-option *ngFor="let queue of queues;let i=index" [value]="queue['name']" (click)="technology(queue,selector,i)"#selector>{{queue['name']}}
+         </mat-option>    
+       </mat-select>
+       <mat-error *ngIf="form.controls['queues'].hasError('required')">
+        وارد کردن صف اجباری است
+      </mat-error>
+       </mat-form-field>
+
+       <mat-form-field fxFlex="50"  *ngIf="list.length">
+        <mat-select placeholder="تکنولوژی"  id="technology" multiple [formControl]="form.controls['technology']" >       
+          <mat-option *ngFor="let tech of technologies;let j=index"  
+          [value]="tech">{{  convertor(tech)   }}
+        </mat-option>                  
+        </mat-select> 
+        <mat-error *ngIf="form.controls['technology'].hasError('required')">
+        وارد کردن تکنولوژی اجباری است
+      </mat-error>
+        </mat-form-field>
+
+
+
+
+
+    </div>
+
+   
+</div>
+        </div>
+  <br/>
+ <div fxLayout="row" fxLayoutAlign="center center">
+   
+         <button  mat-stroked-button color="warn" type="submit" fxFlex>
+          <mat-icon style="font-size: 30px;font-weight: bolder;">done</mat-icon>
+              </button>
+              <button  mat-stroked-button color="primary" (click)="exit()"  fxFlex>
+                <mat-icon style="font-size: 30px;font-weight: bolder;">close</mat-icon>
+              </button>
+           
+ </div>
+</form>
+</div>
+</div>
+ 
+ 
+

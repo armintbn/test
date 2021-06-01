@@ -1,0 +1,54 @@
+<div class="backdrop">
+  <div class="alert-box" [style.left]="left" [style.width]="width" >    
+    
+ <form [formGroup]="form" (ngSubmit)="confirm()">
+
+<h1 style="color: brown;">{{title}}</h1>
+
+<div [style.height]="height" [style.text-align]="'center'">   
+
+  <div fxLayout="column">
+<div fxLayout="row wrap" fxLayoutGap="15px" fxFlex>
+<mat-form-field fxFlex>
+<input matInput 
+[formControl]="form.controls['name']" placeholder="نام"
+  >
+  <mat-error *ngIf="form.controls['name'].hasError('required')">
+    وارد کردن نام اجباری است
+  </mat-error>
+</mat-form-field>
+<mat-form-field fxFlex>
+<input matInput [formControl]="form.controls['description']" placeholder="توضیحات">
+</mat-form-field>
+</div>
+<div fxLayout="row wrap" fxLayoutGap="15px" fxFlex>
+<mat-form-field fxFlex>
+<mat-select 
+[formControl]="form.controls['queue_name']"  placeholder="صف"
+>
+  <mat-option *ngFor="let queue of queues" value="{{queue}}">{{queue}}</mat-option>
+</mat-select>
+<mat-error *ngIf="form.controls['queue_name'].hasError('required')">
+  وارد کردن صف اجباری است
+</mat-error>
+</mat-form-field>
+<mat-form-field fxFlex>
+<input matInput type="color" [formControl]="form.controls['color']" placeholder="رنگ"  >
+ </mat-form-field>
+</div>
+</div>
+</div>
+<br/>
+<div fxLayout="row" fxLayoutAlign="center center">
+   
+  <button  mat-stroked-button color="warn"  fxFlex>
+   <mat-icon style="font-size: 30px;font-weight: bolder;">done</mat-icon>
+       </button>
+       <button  mat-stroked-button color="primary" (click)="exit()"  fxFlex>
+         <mat-icon style="font-size: 30px;font-weight: bolder;">close</mat-icon>
+       </button>
+  
+</div>
+</form>
+</div>
+</div>

@@ -1,0 +1,33 @@
+{
+    "greets" :"خوش آمدید",
+    "select language" : "انتخاب زبان",
+    "Dashboard" : "پنل کاربری",
+    "Accounts":"حسابها",
+    "packages" : "بسته ها",
+    "customers" :"مشتریان",
+    "users" :"کاربران",
+    "orders" : "سفارشات",
+    "accounting":"حسابداری",
+    "currencies":"ارز",
+    "wallet":"کیف پول",
+    "transactions":"نقل و انتقال",
+    "withdraw request":"برگشت درخواست",
+    "setting":"تنظیمات",
+    "general":"عمومی",
+    "user":"کاربر",
+    "ticketing":"فروش بلیت",
+    "reports":"گزارشات",
+    "call center":"مرکز تماس",
+    "Actions":"عملیات",
+    "theme select" :"انتخاب تم",
+    "smart dialer":"شماره گیر هوشمند",
+    "saturday":"شنبه",
+    "sunday":"یک شنبه",
+    "monday":"دوشنبه",
+    "tuesday":"سه شنبه",
+    "wednesday":"چهاشنبه"
+
+
+
+
+}

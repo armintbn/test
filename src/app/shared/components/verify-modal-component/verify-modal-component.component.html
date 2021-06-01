@@ -1,0 +1,24 @@
+
+
+<div class="backdrop">
+  <div class="alert-box" [style.left]="left" [style.width]="width">
+    <p style="color:brown">هشدار</p>
+    <hr/>
+
+ <p>آیا از حذف این آیتم اطمینان دارید ؟</p>
+
+ <br/>
+
+ <div fxLayout="row" fxLayoutAlign="center center">
+            
+              <button mat-stroked-button color="warn" (click)="ok()" fxFlex>
+                <mat-icon style="font-size: 30px;font-weight: bolder;">done</mat-icon>                
+              </button>
+           
+              <button mat-stroked-button color="primary" (click)="deny()" fxFlex>
+                <mat-icon style="font-size: 30px;font-weight: bolder;">close</mat-icon>
+              </button>
+
+ </div>
+ </div>
+ </div>

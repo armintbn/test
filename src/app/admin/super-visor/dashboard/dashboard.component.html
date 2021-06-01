@@ -1,0 +1,85 @@
+<div fxLayout="column">
+
+    <mat-accordion fxFlex>
+
+        <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    جستجوی کابران در صف
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div fxLayout="row wrap"  fxLayoutGap="30px">   
+                <mat-form-field fxFlex="25">
+                    <mat-select placeholder="انتخاب صف" (selectionChange)="send_queues_names_to_webSocket($event.value)">
+                        <mat-option *ngFor="let queues of queuesToshow" [value]="queues">
+                            {{queues}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>            
+                <mat-form-field fxFlex *ngIf="selectedQueue">
+                    <mat-select placeholder="وضعیت" [(ngModel)]="status" (selectionChange)="send_queues_names_to_webSocket(selectedQueue)">
+                    <mat-option *ngFor="let status of statusList" [value]="status" >
+                        {{status}}
+                    </mat-option>
+
+                      </mat-select>  
+                </mat-form-field>
+                <mat-form-field fxFlex *ngIf="selectedQueue">
+                    <mat-select placeholder="وقفه در پاسخگویی" [(ngModel)]="delay" (selectionChange)="send_queues_names_to_webSocket(selectedQueue)">
+                        <mat-option [value]="'--'">--</mat-option>
+                        <mat-option [value]="false">unpaused</mat-option>
+                        <mat-option [value]="true">paused</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex *ngIf="selectedQueue">
+                    <input matInput placeholder="داخلی" [(ngModel)]="internal" (input)="filterData()">
+                </mat-form-field>
+
+            </div>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-card fxLayout="row wrap" fxLayoutGap="30px" fxLayoutAlign="center"
+    fxFlex>
+        <mat-progress-bar mode="buffer" *ngIf="wait"></mat-progress-bar>
+        <div *ngFor="let details of agentsList;let i=index">
+        <mat-card id="container" fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutGap="5px" fxFlex   >
+                <i fxLayoutAlign="start" >{{details.full_name ? details.full_name : 'تعریف نشده'}}</i>
+                <mat-card style="height:50px;width:300px" fxLayout="row" fxLayoutGap="2px" fxLayoutAlign="end center"
+                    [style.background-color]="details.status == 'unknown' ? 'white !important' :
+                    details.status == 'not_inuse'  ? 'blue !important' :
+                    details.status == 'inuse' ? 'green !important' :
+                    details.status == 'busy' ? 'yellow !important' :
+                    details.status == 'invalid' ? 'brown !important' :
+                    details.status == 'unavailable' ? 'grey !important' :
+                    details.status == 'ringing' ? 'orange !important' :
+                    details.status == 'ringinuse' ? 'pink !important' :
+                    details.status == 'onhold' ? 'red !important': 'black !important'" fxFlex [style.font-size]="medium">
+                    <div fxLayout="row" fxLayoutGap="5px" [style.color]="(details.status == 'ringinuse' ||
+                     details.status =='ringing'  ||
+                     details.status == 'busy') ? 'back' : 'white' " [style.font-size]="small">
+                        <i>{{details.status ? details.status : ' '}}</i>
+                        <i>{{ details.lastCall ? timeFormatter(details.lastCall)  : ' '}}</i>
+                        <i>{{details.name}}</i>
+                    </div>
+                    <div class="circle" [style.border-color]="'brown'" fxLayoutAlign="center center">
+                     {{details.callsTaken ? details.callsTaken : ' '}}
+                    </div>
+                </mat-card>
+               
+                <div fxLayout="row" fxLayoutGap="50px">
+                    <i>{{details.LastCall ? dateFormatter(details.LastCall) : ' '}}</i>
+                    <i>{{details.paused == 0 ? 'unpaused' : 'paused'}}</i>
+                    <i>{{details.button ? details.button : ' '}}</i>
+                </div>
+
+
+            </div>
+
+        </mat-card>
+    </div>
+        <br />
+    </mat-card>
+</div>

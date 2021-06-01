@@ -1,0 +1,78 @@
+<mat-card class="status" fxLayoutAlign="center center" *ngIf="wait">
+  <h2 class="blink" >در حال تغییر وضعیت ...</h2>
+</mat-card> 
+ <div *ngIf="!wait">
+ <mat-card *ngIf="service.agentStatus == 'ringNoAnswer'">
+  <mat-card-title [ngStyle]="{'color': 'red','font-size':'10'}"> توجه</mat-card-title>
+  <mat-card-content>        
+    <p>‌ صف : {{service.queue}} </p>     
+    <p>  داخلی : {{service.internal}}  </p>  <br/>
+    داخلی شما  به دلیل عدم پاسخگویی مکرر به تماس های صف  به حالت وقفه(pause) در آمد. برای شروع مجدد روی دکمه وقفه به دلیل عدم پاسخگویی در صف مورد نظر کلیک کنید.
+    </mat-card-content>
+    <br/>
+  <div>
+    <button mat-raised-button color="warn" (click)="exit()">متوجه شدم</button>
+  </div>
+  <hr/>
+</mat-card> 
+
+
+ <mat-card *ngFor="let queues of queuesOfButtons;let i=index" >
+  <mat-card >
+      <h6>
+        <mat-card-subtitle [ngStyle]="{'color': 'brown'}" style="font-size: 10;">صف : {{queues}}</mat-card-subtitle>      
+      </h6>
+      <br/>
+    <span *ngFor="let button of buttons">
+   <button mat-raised-button #butt  fxLayoutGap="20px"
+   style="min-width: 20%; display: inline-block;"
+   [ngStyle]="{'background-color': button.color ,'color':'white'}"
+   [id]="button.id" 
+   [title]="button.name"
+   (click)="action(button.id)"
+   [disabled]="!button.allowed" 
+    *ngIf="button.queue_name == queues && button.allowed">{{ button.name !='#no_answer_pause#' ? button.name : 'وقفه به دلیل عدم پاسخگویی' }}</button>  
+    </span>   
+  </mat-card>
+ </mat-card>
+  
+<mat-card>
+  <h4>
+    کارکرد روزانه :
+  </h4>
+</mat-card>
+  <div class="mat-elevation-z8" >   
+ 
+      <table mat-table [dataSource]="dataSource" class="table">
+        <ng-container matColumnDef="row">
+          <th mat-header-cell *matHeaderCellDef> ردیف </th>
+          <td mat-cell *matCellDef="let element;let i=index"> {{i + 1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="queue_name">
+          <th mat-header-cell *matHeaderCellDef> صف </th>
+          <td mat-cell *matCellDef="let element"> {{element.button.queue_name}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> فعالیت </th>
+          <td mat-cell *matCellDef="let element"> {{element.button.name}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="length">
+          <th mat-header-cell *matHeaderCellDef> مجموع مدت در روز جاری </th>
+          <td mat-cell *matCellDef="let element"> {{element.length}} </td>
+        </ng-container>
+
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    <div fxLayoutAlign="center center" >
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons fxLayoutAlign="center center" fxFill></mat-paginator>
+      </div>
+      </div>
+    </div>
+
+ 

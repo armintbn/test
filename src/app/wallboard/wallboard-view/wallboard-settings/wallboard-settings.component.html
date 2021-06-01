@@ -1,0 +1,110 @@
+<div class="backdrop">
+    <mat-card class="alert-box">
+        <mat-card-header>
+            <h4 [ngStyle]="{'color':'brown'}">{{ 'تنظیمات والبورد صف :' + ' (' + queueName + ') ' }}</h4>
+        </mat-card-header>                             
+            <mat-form-field >
+                <mat-select [(ngModel)]="selectedValues" placeholder="انتخاب شاخص های کلیدی"
+                 multiple  color="primary" title="{{selectedValues}}">
+                    <mat-option [value]="keys" *ngFor="let keys of keysCombine"
+                     (click)="indexDefination(keys)" >
+                        {{keys}}
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>          
+        
+        <hr [ngStyle]="{'width':'80%','color':'brown'}">
+        <div style="height: 420px;overflow-y: auto;">
+        <div *ngFor="let items of selectedKeys">                   
+            <br/><br/>                       
+            <mat-card-title>
+                <label>شاخص کلیدی انتخاب شده : ({{items}})</label>                 
+              </mat-card-title>
+              <hr [ngStyle]="{'width':'80%','color':'brown'}"/>
+          <div fxLayout="column">
+                <div fxLayout="row" fxLayoutGap="30px" fxFlex>
+                 <mat-form-field fxFlex>
+                <mat-select color="primary" placeholder=" انتخاب رنگ اول"
+                  style="width: 100%;"  [(ngModel)]="form.controls[items].value['color1']">             
+                    <mat-option value="lightgreen" >
+                        سبز
+                    </mat-option>
+                    <mat-option value="orange">
+                        نارنجی
+                    </mat-option>
+                    <mat-option value="red" >
+                        قرمز
+                    </mat-option>
+                </mat-select>          
+                </mat-form-field>                  
+            
+            <mat-form-field fxFlex>
+            <input matInput color="primary" placeholder="مقدار اول"
+             style="width: 100%;" type="number" [(ngModel)]="form.controls[items].value['value1']">
+            </mat-form-field>    
+                </div>
+                
+    <div fxLayout="row" fxLayoutGap="30px" fxFlex>
+    <mat-form-field fxFlex>
+    <mat-select  placeholder=" انتخاب رنگ دوم" [(ngModel)]="form.controls[items].value['color2']" color="primary" style="width: 100%;">             
+        <mat-option value="lightgreen">
+            سبز
+        </mat-option >
+        <mat-option value="orange">
+            نارنجی
+        </mat-option>
+        <mat-option value="red">
+            قرمز
+        </mat-option>
+    </mat-select>    
+</mat-form-field>            
+
+ <mat-form-field fxFlex>
+<input placeholder="مقدار دوم" matInput color="primary" type="number" [(ngModel)]="form.controls[items].value['value2']"   style="width: 100%;">
+</mat-form-field>   
+    
+
+</div>
+
+<div fxLayout="row" fxLayoutGap="30px" fxFlex>
+ <mat-form-field fxFlex>
+    <mat-select placeholder=" انتخاب رنگ سوم"  color="primary"  [(ngModel)]="form.controls[items].value['color3']" style="width: 100%;">             
+        <mat-option value="lightgreen" >
+            سبز
+        </mat-option>
+        <mat-option value="orange">
+            نارنجی
+        </mat-option>
+        <mat-option value="red">
+            قرمز
+        </mat-option>
+    </mat-select>   
+</mat-form-field>             
+
+    <mat-form-field fxFlex>
+<input matInput placeholder="مقدار سوم" color="primary" type="number" [(ngModel)]="form.controls[items].value['value3']"  style="width: 100%;">
+</mat-form-field>
+    
+
+</div>
+</div>
+</div>
+</div>
+
+<br/>
+ <div fxLayout="row" fxLayoutAlign="center center">
+   
+    <button  mat-stroked-button color="warn" (click)="setSettings()"  fxFlex>
+     <mat-icon style="font-size: 30px;font-weight: bolder;">done</mat-icon>
+         </button>
+         <button  mat-stroked-button color="primary" (click)="exit()"  fxFlex>
+           <mat-icon style="font-size: 30px;font-weight: bolder;">close</mat-icon>
+         </button>
+    
+  </div>
+
+
+</mat-card>
+
+
+</div>

@@ -1,0 +1,62 @@
+<mat-card style="min-height: 300px;">
+  <div fxLayout="column" fxLayoutGap="20px">
+      <div fxLayout="row" fxFlex>   
+        <mat-card fxFill>
+        <mat-form-field fxFlex="35">
+        <mat-select (selectionChange)="selectors($event)" placeholder="انتخاب صف"
+        title="{{allowedList}}" status="primary"  
+           multiple>
+          <mat-option *ngFor="let queues of selector" (click)="liveStreamConnect()" value="{{queues}}">{{queues}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+        <div fxLayoutAlign="end end" *ngIf="allowedList.length" fxFlex>
+          <button style="float: left;" mat-raised-button color="primary" (click)="fullScreen()"  >
+            <i class="full-screen"></i>
+           </button>
+          </div>
+        </mat-card>
+                        
+    
+      </div>
+    
+    <mat-card *ngFor="let queues of Queue;let i=index"> 
+     <div-header *ngIf="allowedList.includes(queues['Queue'])" >
+      <i class="titlefont">{{'صف:' + queues['Queue']}}</i>
+      &nbsp;&nbsp;
+      <mat-icon (click)="queueSettings(queues['Queue'])" [ngStyle]="{'color':'brown'}" style="cursor: pointer;">settings</mat-icon>
+      </div-header>
+      <br/>
+  <div  class="carddetailparent" style="min-height: 100px;">
+      <br/> <br/>
+       <div *ngFor="let tiles of queues | keyvalue"> 
+         <div  class="cardchild" *ngIf="tiles.key != 'Queue' && visibilitySettingsParser(queues['Queue'],tiles.key)" >
+       <div class="detailcard "  *ngIf="allowedList.includes(queues['Queue']) " 
+       [ngStyle]="{'background-color':colorsSettingsParser(queues['Queue'],tiles.key,tiles.value) , 'color': colorsSettingsParser(queues['Queue'],tiles.key,tiles.value)!='red' ? 'black' : 'palegoldenrod'}"  >
+      
+          <div class="parent" >   
+            <div class="child" >
+              <i class="titlefont">{{tiles.key}}</i>
+              <hr  class="hr"/> 
+            </div>  
+            <div class="child" >            
+            <i class="valuefont">{{tiles.value}}</i>
+            </div>                               
+          </div>   
+          </div>     
+        </div>        
+    </div>   
+    </div>
+  </mat-card>
+  
+  </div>
+  </mat-card>
+    <ng-template ngxDeleteConfirm></ng-template>
+  
+    
+   
+  
+  
+        
+     
+  
+    

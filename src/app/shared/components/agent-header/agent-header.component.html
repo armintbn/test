@@ -1,0 +1,19 @@
+<mat-card fxLayout="row" >
+    <div fxLayout="row"  fxFlex >
+    <button mat-button [routerLink]="'./dashboard'" ><mat-icon>dashboard</mat-icon>  پنل کاربری</button>  
+    <button mat-button [matMenuTriggerFor]="historyMenu" ><mat-icon>history</mat-icon> تاریخچه</button>
+    <mat-menu #historyMenu="matMenu">
+      <button mat-menu-item [routerLink]="'./call-history'" ><mat-icon> call</mat-icon> تماس ها</button>
+      <button mat-menu-item [routerLink]="'./activities-history'" ><mat-icon> business</mat-icon> فعالیت ها</button>
+    </mat-menu>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="end end" fxFlex>
+      <button mat-button [matMenuTriggerFor]="" style="font-size: small;font-weight: bolder;"> نسخه ۲ </button>        
+      <button mat-button [matMenuTriggerFor]="userMenu" style="font-size: medium;font-weight: bolder"><mat-icon>power_settings_new</mat-icon> کاربر : {{fullName}} </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item  (click)="logout()" ><mat-icon>exit_to_app</mat-icon>خروج</button>      
+      </mat-menu>     
+  </div>
+
+</mat-card>

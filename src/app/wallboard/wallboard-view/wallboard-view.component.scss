@@ -1,0 +1,85 @@
+
+.parent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.child {
+  width: 380px;
+  margin: 10px;    
+}
+
+.cardchild {
+  width: 12vw;  
+  margin: 8px;   
+}
+
+
+.hr {
+  color: blueviolet;
+  border-color: black;    
+}
+
+.detailcard {
+  direction: ltr;
+  width: 100%;
+  height: 25%;
+  text-align: center;
+  background-color: lightgreen;
+  border-color: black;  
+  border-width: 1px; 
+  border-radius: 3px;
+  border-style: solid;
+  margin: 10px; 
+  cursor: pointer;
+ }
+
+.carddetailparent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  direction: ltr; 
+  word-wrap: break-word;
+
+}
+
+.card{
+  direction: ltr;    
+}
+
+.valuefont {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.5vw;
+  font-weight: 900;  
+
+}
+
+.titlefont {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1vw;
+  font-weight: 900;     
+  margin:3px
+
+}
+
+
+.zoom {
+  transition: transform .2s; 
+  cursor: pointer;
+}
+
+.zoom:hover {
+  transform: scale(1.5); 
+}
+
+
+.full-screen {
+  vertical-align: middle;
+  box-sizing: border-box;
+  display: inline-block;
+  border: .1em solid currentColor;
+  width: 1em;
+  height: 1em;
+  position: relative;
+}

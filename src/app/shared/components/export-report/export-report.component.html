@@ -1,0 +1,15 @@
+
+<br/>
+<mat-form-field>
+<mat-select  status="primary" 
+ placeholder="دانلود گزارش" class="select"
+ > 
+
+    <mat-option [value]="'excel'" (click)="tableToExcel('excel')"  fxLayout="row" fxLayoutAlign="center center">       
+      <p fxFlex style="font-weight: bolder;">Excel</p>    
+    </mat-option>
+    <mat-option [value]="'csv'" (click)="tableToExcel('csv')" >
+      <p fxFlex style="font-weight: bolder;">Csv</p>    
+    </mat-option>
+  </mat-select>
+  </mat-form-field>

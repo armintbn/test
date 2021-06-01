@@ -1,0 +1,19 @@
+.table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .status {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .blink {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }

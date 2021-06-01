@@ -1,0 +1,14 @@
+.parent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .child {
+    width: 300px;
+  }
+  
+  .table {
+    width: 100%;
+    table-layout: fixed;
+  }
